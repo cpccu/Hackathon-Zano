@@ -1,0 +1,168 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+
+datasource db {
+  provider  = "postgresql"
+}
+
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum ResourceCategory {
+  NOTES
+  QUESTION_PAPER
+  NOTICE
+  LAB_MANUAL
+}
+
+enum FaqCategory {
+  BUS
+  RULES
+  EXAM
+  GENERAL
+}
+
+enum ItemType {
+  LOST
+  FOUND
+}
+
+enum ItemStatus {
+  OPEN
+  RESOLVED
+}
+
+enum ComplaintStatus {
+  RECEIVED
+  IN_PROGRESS
+  RESOLVED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  studentId    String?
+  department   String?
+  role         Role     @default(STUDENT)
+  createdAt    DateTime @default(now())
+
+  registrations Registration[]
+  resources     Resource[]
+  items         LostFoundItem[]
+  complaints    Complaint[]
+}
+
+model Club {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  category    String
+  description String?
+  events      Event[]
+}
+
+model Event {
+  id            String         @id @default(cuid())
+  title         String
+  description   String
+  type          String
+  location      String
+  startsAt      DateTime
+  endsAt        DateTime?
+  capacity      Int?
+  clubId        String
+  club          Club           @relation(fields: [clubId], references: [id])
+  registrations Registration[]
+  createdAt     DateTime       @default(now())
+}
+
+model Registration {
+  id          String    @id @default(cuid())
+  userId      String
+  eventId     String
+  qrToken     String    @unique @default(cuid())
+  checkedInAt DateTime?
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  event       Event     @relation(fields: [eventId], references: [id])
+
+  @@unique([userId, eventId])
+}
+
+model Course {
+  id         String     @id @default(cuid())
+  code       String     @unique
+  title      String
+  department String
+  resources  Resource[]
+}
+
+model Resource {
+  id          String           @id @default(cuid())
+  title       String
+  description String?
+  category    ResourceCategory
+  department  String
+  semester    String?
+  fileUrl     String
+  courseId    String?
+  course      Course?          @relation(fields: [courseId], references: [id])
+  uploaderId  String
+  uploader    User             @relation(fields: [uploaderId], references: [id])
+  createdAt   DateTime         @default(now())
+}
+
+model Faq {
+  id        String      @id @default(cuid())
+  category  FaqCategory
+  question  String
+  answer    String
+  createdAt DateTime    @default(now())
+}
+
+model BusRoute {
+  id         String   @id @default(cuid())
+  name       String
+  stops      String[]
+  departures String[]
+  notes      String?
+}
+
+model LostFoundItem {
+  id          String     @id @default(cuid())
+  type        ItemType
+  title       String
+  description String
+  location    String
+  date        DateTime
+  imageUrl    String?
+  contact     String?
+  status      ItemStatus @default(OPEN)
+  reporterId  String
+  reporter    User       @relation(fields: [reporterId], references: [id])
+  createdAt   DateTime   @default(now())
+}
+
+model Complaint {
+  id          String          @id @default(cuid())
+  subject     String
+  description String
+  status      ComplaintStatus @default(RECEIVED)
+  adminNote   String?
+  userId      String
+  user        User            @relation(fields: [userId], references: [id])
+  createdAt   DateTime        @default(now())
+}
+
