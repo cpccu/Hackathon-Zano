@@ -3,7 +3,6 @@
 One web app that replaces the scattered Facebook groups, Messenger chats, ad hoc Google Forms and notice boards at City University with a single, searchable source of truth for campus life.
 
 - **Live app:** https://campusos-kappa-seven.vercel.app
-- **Demo video:** GOOGLE-DRIVE-LINK
 - **Repository:** https://github.com/cpccu/Hackathon-Zano
 
 ---
@@ -164,4 +163,4 @@ prisma/
 - No credentials are committed. `.env` is git-ignored.
 - Passwords are hashed with bcrypt.
 - Admin routes and server actions are checked on the server.
-- Demo credentials above are for judging only.
+- Demo credentials are shared only through the submission form and are for judging only.
