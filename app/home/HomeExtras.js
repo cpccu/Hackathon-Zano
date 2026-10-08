@@ -44,40 +44,6 @@ export async function MyNextEvent() {
   );
 }
 
-export async function StatsStrip() {
-  const [clubs, events, resources, items] = await Promise.all([
-    prisma.club.count(),
-    prisma.event.count({ where: { startsAt: { gte: new Date() } } }),
-    prisma.resource.count(),
-    prisma.lostFoundItem.count({ where: { status: "OPEN" } }),
-  ]);
-
-  const stats = [
-    { label: "Active Campus Clubs", value: clubs, icon: "🏛️" },
-    { label: "Upcoming Events", value: events, icon: "🎉" },
-    { label: "Study Resources", value: resources, icon: "📚" },
-    { label: "Open Lost & Found", value: items, icon: "🔍" },
-  ];
-
-  return (
-    <div className="max-w-6xl mx-auto px-4 mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-      {stats.map((item) => (
-        <div
-          key={item.label}
-          className="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-5 text-center backdrop-blur-xl shadow-xl hover:border-slate-700 transition duration-200 space-y-1"
-        >
-          <div className="text-2xl mb-1">{item.icon}</div>
-          <p className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            {item.value}
-          </p>
-          <p className="text-xs text-slate-400 font-medium uppercase tracking-wide">
-            {item.label}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export function QuickLinks() {
   const links = [

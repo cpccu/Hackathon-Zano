@@ -45,7 +45,7 @@ export default async function Navbar() {
             alt="City University Logo"
             width={52}
             height={52}
-            className="rounded-full bg-white object-contain shadow-sm"
+            className="rounded-full bg-white object-contain shadow-sm w-[52px] h-[52px]"
             priority
           />
           <div className="flex items-center gap-2">

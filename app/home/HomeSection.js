@@ -59,7 +59,7 @@ export default async function HomeFeaturesSection() {
   ];
 
   return (
-    <section className="relative py-16 sm:py-24">
+    <section className="relative overflow-hidden py-12 sm:py-16 mt-8">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-900/10 blur-[140px] pointer-events-none rounded-full" />
 
@@ -125,33 +125,6 @@ export default async function HomeFeaturesSection() {
           ))}
         </div>
 
-        {/* Dynamic System Stats Bar */}
-        <div className="bg-slate-900/60 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div className="space-y-1">
-            <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {resourcesCount}
-            </p>
-            <p className="text-[11px] sm:text-xs text-slate-400 uppercase font-medium">Study Papers</p>
-          </div>
-          <div className="space-y-1 border-l border-slate-800/80">
-            <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {openLostFoundCount}
-            </p>
-            <p className="text-[11px] sm:text-xs text-slate-400 uppercase font-medium">Open Reports</p>
-          </div>
-          <div className="space-y-1 border-l border-slate-800/80">
-            <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {busRoutesCount}
-            </p>
-            <p className="text-[11px] sm:text-xs text-slate-400 uppercase font-medium">Bus Routes</p>
-          </div>
-          <div className="space-y-1 border-l border-slate-800/80">
-            <p className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {faqsCount}
-            </p>
-            <p className="text-[11px] sm:text-xs text-slate-400 uppercase font-medium">Help Guides</p>
-          </div>
-        </div>
       </div>
     </section>
   );
