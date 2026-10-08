@@ -89,7 +89,7 @@ export default function Footer() {
       {/* Bottom Sub-bar */}
       <div className="relative border-t border-slate-800/80 py-4 text-center text-xs text-slate-400 bg-slate-900/50">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>© {new Date().getFullYear()} CampusOS · Built for City University students</span>
+          <span>©{new Date().getFullYear()} CampusOS · Built for City University students</span>
           <span className="text-slate-400 font-medium">Single Source of Truth for Campus Life</span>
         </div>
       </div>

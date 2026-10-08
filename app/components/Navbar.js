@@ -9,9 +9,26 @@ const links = [
   { href: "/lost-found", label: "Lost & Found" },
 ];
 
+const userLinks = [
+  { href: "/my-events", label: "My Events" },
+  { href: "/complaints", label: "Complaints" },
+];
+
+const adminLinks = [
+  { href: "/admin/events/new", label: "New Event" },
+  { href: "/admin/checkin", label: "Check-in" },
+  { href: "/admin/complaints", label: "All Complaints" },
+  { href: "/admin/helpdesk", label: "Manage Helpdesk" },
+];
+
 export default async function Navbar() {
   const session = await auth();
   const user = session?.user;
+  const navLinks = [
+    ...links,
+    ...(user ? userLinks : []),
+    ...(user?.role === "ADMIN" ? adminLinks : []),
+  ];
 
   const logout = async () => {
     "use server";
